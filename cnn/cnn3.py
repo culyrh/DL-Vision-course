@@ -1,5 +1,5 @@
-# GPU 사용을 위해 파이썬을 사용하지 않고
-# colab에서 CUDA 12.4 버전으로 빌드된 GPU를 사용하여 진행한다
+# GPU 사용을 위해 파이썬에서 실행하지 않고
+# colab에서 CUDA 12.4 버전으로 빌드된 GPU를 사용함
 
 # AlexNet, VGG, ResNet 모델 구현
 
