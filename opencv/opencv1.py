@@ -43,6 +43,7 @@ while cap.isOpened():
         print('더 이상 가져올 프레임이 없어요')
         break
 
+    frame = cv2.resize(frame, (360, 640)) # 크기 조절
     cv2.imshow('frame', frame)   # 일반 환경에서 화면에 출력하는 방법
 
     if cv2.waitKey(1) & 0xFF == ord('q'):
@@ -55,7 +56,9 @@ cv2.destroyAllWindows()
 
 
 
+
 # (Jupyter Notebook_only) 동영상 파일 출력
+# 카메라 출력
 from IPython.display import HTML
 from base64 import b64encode
 
@@ -100,13 +103,13 @@ cv2.destroyAllWindows()
 
 
 
-# 카메라 프레임 저장
+# 카메라 프레임 ㅈ저장
 import cv2
 import os
 import time
 
 def auto_capture_frames(interval=1.0, max_frames=50):
-    cap = cv2.VideoCapture(0)
+    cap = cv2.VideoCapture(0)   # 웹캠 연결
     
     if not cap.isOpened():
         print("웹캠을 열 수 없습니다!")
@@ -120,6 +123,7 @@ def auto_capture_frames(interval=1.0, max_frames=50):
     
     print(f"{interval}초마다 자동 저장, 최대 {max_frames}개. 'q'로 종료")
     
+    # 최대 프레임수를 초과하지 않을 때까지 반복
     while frame_count < max_frames:
         ret, frame = cap.read()
         if not ret:
@@ -201,7 +205,7 @@ create_video_from_images(image_folder, output_video, fps)
 # 생성된 동영상 파일 출력
 import cv2
 
-cap = cv2.VideoCapture('auto_frames/output_video.mp4')
+cap = cv2.VideoCapture('./auto_frames/output_video.mp4')
 
 while cap.isOpened():
     ret, frame = cap.read()
