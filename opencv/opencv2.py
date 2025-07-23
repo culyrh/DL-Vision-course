@@ -157,10 +157,10 @@ print(result)
 
 
 # 이미지 저장 - png
-
 import cv2
 
-img = cv2.imread('./img.jpg', cv2.IMREAD_GRAYSCALE)   # 흑백으로 이미지 불러오기
+img = cv2.imread('./opencv/img.jpg', cv2.IMREAD_GRAYSCALE)   # 흑백으로 이미지 불러오기
+cv2.imshow('img', img)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 
@@ -182,7 +182,7 @@ fourcc = cv2.VideoWriter_fourcc(*'DIVX')
 # 3) 원본 프레임 크기, FPS 읽기
 width  = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
 height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
-fps    = cap.get(cv2.CAP_PROP_FPS) * 2   # 재생 속도 2배
+fps    = cap.get(cv2.CAP_PROP_FPS) * 2   # 재생 속도를 2배로 설정
 
 # 4) 출력 파일 설정 - 객체 생성
 output_path = './video_fast.avi'
@@ -195,17 +195,20 @@ while cap.isOpened():
         break
 
     out.write(frame)        # 영상 프레임만 저장 (소리 제외)
-    # cv2.imshow('frame', frame)       # 화면 출력 (옵션)
+    frame = cv2.resize(frame, (360, 640)) # 출력 크기 조절
+    
+    cv2.imshow('frame', frame)       # 화면 출력 (옵션)
+    if cv2.waitKey(1) & 0xFF == ord('q'):
+        break
 
-
-# 6) 리소스 해제
+# 6) 리소스 해제 및 AVI 파일 다운로드
 cap.release()
 out.release()
+# files.download(output_path)   # (코랩) 다운로드
 
+cv2.destroyAllWindows()
 
-# 7) 생성된 AVI 파일 다운로드
 print(output_path)
-# files.download(output_path)   # (코랩) 출력
 
 print('DONE')   # 정상적으로 동작하면 'DONE' 출력
 
