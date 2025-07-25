@@ -142,6 +142,33 @@ cv2.destroyAllWindows()
 
 
 
+# 실습
+import numpy as np
+import cv2
+
+# ① 이미지 크기(shape)를 지정해 0으로 초기화
+img = np.zeros((480, 640, 3), dtype=np.uint8)
+
+SCALE = 1        # 글자 크기
+COLOR = (255, 255, 255) # 흰색
+THICKNESS = 1    # 선 두께
+
+# 선택 과제 : 동그라미 안에 텍스트 넣어주세요
+cv2.circle(img, (80, 60), 80, COLOR, THICKNESS, cv2.LINE_AA)
+
+# ③ ‘Vision AI’ 텍스트,
+# ④ 폰트 종류,
+#    위치·크기·색·두께는 고정
+cv2.putText(img, "Vision AI", (20,50), cv2.FONT_HERSHEY_TRIPLEX, SCALE, COLOR, THICKNESS)
+
+# ⑤ 이미지 표시
+cv2.imshow(img)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+
+
+
 # 이미지 저장 - jpg
 import cv2
 
