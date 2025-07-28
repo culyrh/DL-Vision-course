@@ -146,23 +146,17 @@ cv2.destroyAllWindows()
 import numpy as np
 import cv2
 
-# ① 이미지 크기(shape)를 지정해 0으로 초기화
 img = np.zeros((480, 640, 3), dtype=np.uint8)
 
-SCALE = 1        # 글자 크기
-COLOR = (255, 255, 255) # 흰색
-THICKNESS = 1    # 선 두께
+SCALE = 1   
+COLOR = (255, 255, 255)
+THICKNESS = 1 
 
-# 선택 과제 : 동그라미 안에 텍스트 넣어주세요
 cv2.circle(img, (80, 60), 80, COLOR, THICKNESS, cv2.LINE_AA)
 
-# ③ ‘Vision AI’ 텍스트,
-# ④ 폰트 종류,
-#    위치·크기·색·두께는 고정
 cv2.putText(img, "Vision AI", (20,50), cv2.FONT_HERSHEY_TRIPLEX, SCALE, COLOR, THICKNESS)
 
-# ⑤ 이미지 표시
-cv2.imshow(img)
+cv2.imshow('img', img)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 
@@ -349,7 +343,7 @@ import cv2
 img = cv2.imread('./img.jpg')
 # img.shape # (390, 640, 3)
 
-crop = img[100:200, 200:400] # 세로 기준 100 : 200 까지, 가로 기준 200 : 400 까지 자름
+crop = img[100:200, 200:400]   # 세로 기준 100 : 200 까지, 가로 기준 200 : 400 까지 자름
 
 cv2.imshow('img', img) # 원본 이미지
 cv2.imshow('crop', crop) # 잘린 이미지
@@ -364,7 +358,7 @@ import cv2
 
 img = cv2.imread('./img.jpg')
 
-crop = img[100:200, 200:400] # 세로 기준 100 : 200 까지, 가로 기준 200 : 400 까지 자름
+crop = img[100:200, 200:400]   # 세로 기준 100 : 200 까지, 가로 기준 200 : 400 까지 자름
 img[100:200, 400:600] = crop
 
 cv2.imshow('img', img) # 원본 이미지
@@ -379,12 +373,12 @@ cv2.destroyAllWindows()
 import cv2
 
 img = cv2.imread('./img.jpg')
-flip_horizontal = cv2.flip(img, 1) # flipCode > 0 : 좌우 대칭 Horizontal
+flip_horizontal = cv2.flip(img, 1)   # flipCode > 0 : 좌우 대칭 Horizontal
 
 cv2.imshow('img', img)
 cv2.imshow('flip_horizontal', flip_horizontal)
 cv2.waitKey(0)
-
+cv2.destroyAllWindows()
 
 
 
@@ -392,7 +386,7 @@ cv2.waitKey(0)
 import cv2
 
 img = cv2.imread('./img.jpg')
-flip_vertical = cv2.flip(img, 0) # flipCode == 0 : 상하 대칭 Vertical
+flip_vertical = cv2.flip(img, 0)   # flipCode == 0 : 상하 대칭 Vertical
 
 cv2.imshow('img', img)
 cv2.imshow('flip_vertical', flip_vertical)
@@ -406,7 +400,7 @@ cv2.destroyAllWindows()
 import cv2
 
 img = cv2.imread('./img.jpg')
-flip_both = cv2.flip(img, -1) # flipCode < 0 : 상하좌우 대칭
+flip_both = cv2.flip(img, -1)   # flipCode < 0 : 상하좌우 대칭
 
 cv2.imshow('img', img)
 cv2.imshow('flip_both', flip_both)
@@ -416,12 +410,12 @@ cv2.destroyAllWindows()
 
 
 
-# 시계방향 90도 회전
+# 시계방향 180도 회전
 import cv2
 
 img = cv2.imread('./img.jpg')
 
-rotate_180 = cv2.rotate(img, cv2.ROTATE_180) # 180도 회전
+rotate_180 = cv2.rotate(img, cv2.ROTATE_180)   # 180도 회전
 
 cv2.imshow('img', img)
 cv2.imshow('rotate_180', rotate_180)
@@ -436,7 +430,7 @@ import cv2
 
 img = cv2.imread('./img.jpg')
 
-rotate_270 = cv2.rotate(img, cv2.ROTATE_90_COUNTERCLOCKWISE) # 시계 반대 방향으로 90도
+rotate_270 = cv2.rotate(img, cv2.ROTATE_90_COUNTERCLOCKWISE)   # 시계 반대 방향으로 90도
 
 cv2.imshow('img', img)
 cv2.imshow('rotate_270', rotate_270)
@@ -498,7 +492,7 @@ import cv2
 
 img = cv2.imread('./img.jpg')
 
-sigma_1 = cv2.GaussianBlur(img, (0, 0), 1) # sigmaX - 가우시안 커널의 x 방향의 표준 편차
+sigma_1 = cv2.GaussianBlur(img, (0, 0), 1)   # sigmaX - 가우시안 커널의 x 방향의 표준 편차
 sigma_2 = cv2.GaussianBlur(img, (0, 0), 2)
 sigma_3 = cv2.GaussianBlur(img, (0, 0), 3)
 
@@ -518,14 +512,14 @@ import numpy as np
 
 img = cv2.imread('./newspaper.jpg')
 
-width, height = 640, 240 # 가로 크기 640, 세로 크기 240 으로 결과물 출력
+width, height = 640, 240   # 가로 크기 640, 세로 크기 240 으로 결과물 출력
 
-src = np.array([[511, 352], [1008, 345], [1122, 584], [455, 594]], dtype=np.float32) # Input 4개 지점
-dst = np.array([[0, 0], [width, 0], [width, height], [0, height]], dtype=np.float32) # Output 4개 지점
+src = np.array([[511, 352], [1008, 345], [1122, 584], [455, 594]], dtype=np.float32)   # Input 4개 지점
+dst = np.array([[0, 0], [width, 0], [width, height], [0, height]], dtype=np.float32)   # Output 4개 지점
 # 좌상, 우상, 우하, 좌하 (시계 방향으로 4 지점 정의)
 
-matrix = cv2.getPerspectiveTransform(src, dst) # Matrix 얻어옴
-result = cv2.warpPerspective(img, matrix, (width, height)) # matrix 대로 변환을 함
+matrix = cv2.getPerspectiveTransform(src, dst)   # Matrix 얻어옴
+result = cv2.warpPerspective(img, matrix, (width, height))   # matrix 대로 변환을 함
 
 cv2.imshow('img', img)
 cv2.imshow('result', result)
@@ -549,13 +543,14 @@ dst = np.array([[0, 0], [width, 0], [width, height], [0, height]], dtype=np.floa
 matrix = cv2.getPerspectiveTransform(src, dst)   
 warped = cv2.warpPerspective(img, matrix, (width, height))
 
-# 복원을 위한 역행렬 (직사각형 → 사다리꼴) - img.shape[1]:가로 - img.shape[0]:세로
+# 복원을 위한 역행렬 (직사각형 → 사다리꼴)
+# img.shape[1]:가로 - img.shape[0]:세로
 reverse_matrix = cv2.getPerspectiveTransform(dst, src)
 recovered = cv2.warpPerspective(warped, reverse_matrix, (img.shape[1], img.shape[0]))  # 원본 크기로 복원
 
 cv2.imshow('Original', img)
-cv2.imshow('Warped (펼친 이미지)', warped)
-cv2.imshow('Recovered (복원된 이미지)', recovered)
+cv2.imshow('Warped', warped)
+cv2.imshow('Recovered', recovered)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 
@@ -574,8 +569,8 @@ src = np.array([[702, 143], [1133, 414], [726, 1007], [276, 700]], dtype=np.floa
 dst = np.array([[0, 0], [width, 0], [width, height], [0, height]], dtype=np.float32) # Output 4개 지점
 # 좌상, 우상, 우하, 좌하 (시계 방향으로 4 지점 정의)
 
-matrix = cv2.getPerspectiveTransform(src, dst) # Matrix 얻어옴
-result = cv2.warpPerspective(img, matrix, (width, height)) # matrix 대로 변환을 함
+matrix = cv2.getPerspectiveTransform(src, dst)   # Matrix 얻어옴
+result = cv2.warpPerspective(img, matrix, (width, height))   # matrix 대로 변환을 함
 
 cv2.imshow('img', img)
 cv2.imshow('result', result)
@@ -589,8 +584,10 @@ cv2.destroyAllWindows()
 import cv2
 
 img = cv2.imread('book.jpg', cv2.IMREAD_GRAYSCALE)
+img = cv2.resize(img, (500, 700))
 
 ret, binary = cv2.threshold(img, 127, 255, cv2.THRESH_BINARY)
+binary = cv2.resize(binary, (500, 700))
 
 cv2.imshow('img', img)
 cv2.imshow('binary', binary)
@@ -607,15 +604,16 @@ def empty(pos):
     pass
 
 img = cv2.imread('./book.jpg', cv2.IMREAD_GRAYSCALE)
+img = cv2.resize(img, (500, 700))
 
 name = 'Trackbar'
 cv2.namedWindow(name)
 cv2.createTrackbar('threshold', name, 127, 255, empty)
-# bar 이름, 창 이름, 초기값, 최댓값, 이벤트 처리
 
 while True:
     thresh = cv2.getTrackbarPos('threshold', name)   # bar 이름, 창의 이름
     ret, binary = cv2.threshold(img, thresh, 255, cv2.THRESH_BINARY)
+    binary = cv2.resize(binary, (500, 700))
     
     if not ret:
         break
@@ -633,7 +631,6 @@ cv2.destroyAllWindows()
 import cv2
 
 def empty(pos):
-    # print(pos)
     pass
 
 img = cv2.imread('threshold.png', cv2.IMREAD_GRAYSCALE)
@@ -684,7 +681,6 @@ cv2.destroyAllWindows()
 import cv2
 
 def empty(pos):
-    # print(pos)
     pass
 
 img = cv2.imread('book.jpg', cv2.IMREAD_GRAYSCALE)
@@ -707,6 +703,7 @@ while True:
         block_size += 1
 
     binary = cv2.adaptiveThreshold(img, 255, cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY, block_size, c)
+    binary = cv2.resize(binary, (500, 600))
 
     cv2.imshow(name, binary)
     if cv2.waitKey(1) == ord('q'):
@@ -721,9 +718,12 @@ cv2.destroyAllWindows()
 import cv2
 
 img = cv2.imread('./book.jpg', cv2.IMREAD_GRAYSCALE)
+img = cv2.resize(img, (600, 700))
 
 ret, binary = cv2.threshold(img, 127, 255, cv2.THRESH_BINARY)
 ret, otsu = cv2.threshold(img, -1, 255, cv2.THRESH_BINARY | cv2.THRESH_OTSU)
+binary = cv2.resize(binary, (600, 700))
+otsu = cv2.resize(otsu, (600, 700))
 print('otsu threshold ', ret)
 
 cv2.imshow('img', img)
