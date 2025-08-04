@@ -55,7 +55,7 @@ erode = cv2.erode(img, kernel, iterations=3)
 dilate = cv2.dilate(erode, kernel, iterations=3)
 
 cv2.imshow('img', img)
-cv2.imshow('dilat', dilate)
+cv2.imshow('dilate', dilate)
 cv2.imshow('erode', erode)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
@@ -75,7 +75,7 @@ dilate = cv2.dilate(img, kernel, iterations=3)
 erode = cv2.erode(dilate, kernel, iterations=3)
 
 cv2.imshow('img', img)
-cv2.imshow('dilat', dilate)
+cv2.imshow('dilate', dilate)
 cv2.imshow('erode', erode)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
@@ -88,8 +88,10 @@ cv2.destroyAllWindows()
 import cv2
 
 img = cv2.imread('./snowman.png')
+img = cv2.resize(img, (800,600))
 
 canny = cv2.Canny(img, 150, 200)
+canny = cv2.resize(canny, (800,600))
 # 대상 이미지, minVal (하위임계값), maxVal (상위임계값)
 
 cv2.imshow('img', img)
@@ -108,6 +110,7 @@ def empty(pos):
     pass
 
 img = cv2.imread('./snowman.png')
+img = cv2.resize(img, (800,600))
 
 name = "Trackbar"
 cv2.namedWindow(name)
@@ -119,6 +122,7 @@ while True:
     threshold2 = cv2.getTrackbarPos('threshold2', name)
 
     canny = cv2.Canny(img, threshold1, threshold2)
+    canny = cv2.resize(canny, (800,600))
     # 대상 이미지, minVal (하위임계값), maxVal (상위임계값)
 
     cv2.imshow('img', img)
@@ -149,6 +153,11 @@ COLOR = (0, 200, 0) # 녹색
 cv2.drawContours(target_img, contours, -1, COLOR, 2) # 윤곽선 그리기
 # 대상 이미지, 윤곽선 정보, 인덱스 (-1 이면 전체), 색깔, 두께
 
+img = cv2.resize(img, (600,375))
+gray = cv2.resize(gray, (600,375))
+otsu = cv2.resize(otsu, (600,375))
+target_img = cv2.resize(target_img, (600,375))
+
 cv2.imshow('img', img)
 cv2.imshow('gray', gray)
 cv2.imshow('otsu', otsu)
@@ -164,7 +173,7 @@ cv2.destroyAllWindows()
 import cv2
 
 img = cv2.imread('./card.png')
-target_img = img.copy() # 사본 이미지
+target_img = img.copy()   # 사본 이미지
 
 gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 ret, otsu = cv2.threshold(gray, -1, 255, cv2.THRESH_BINARY | cv2.THRESH_OTSU)
@@ -177,6 +186,11 @@ contours, hierarchy = cv2.findContours(otsu, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX
 
 COLOR = (0, 200, 0) # 녹색
 cv2.drawContours(target_img, contours, -1, COLOR, 2)
+
+img = cv2.resize(img, (600,375))
+gray = cv2.resize(gray, (600,375))
+otsu = cv2.resize(otsu, (600,375))
+target_img = cv2.resize(target_img, (600,375))
 
 cv2.imshow('img', img)
 cv2.imshow('gray', gray)
@@ -205,6 +219,11 @@ for cnt in contours:
     x, y, width, height = cv2.boundingRect(cnt)
     cv2.rectangle(target_img, (x, y), (x + width, y + height), COLOR, 2) # 사각형 그림
 
+img = cv2.resize(img, (600,375))
+gray = cv2.resize(gray, (600,375))
+otsu = cv2.resize(otsu, (600,375))
+target_img = cv2.resize(target_img, (600,375))
+
 cv2.imshow('img', img)
 cv2.imshow('gray', gray)
 cv2.imshow('otsu', otsu)
@@ -220,18 +239,21 @@ cv2.destroyAllWindows()
 import cv2
 
 img = cv2.imread('./card.png')
-target_img = img.copy() # 사본 이미지
+target_img = img.copy()   # 사본 이미지
 
 gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 ret, otsu = cv2.threshold(gray, -1, 255, cv2.THRESH_BINARY | cv2.THRESH_OTSU)
 contours, hierarchy = cv2.findContours(otsu, cv2.RETR_LIST, cv2.CHAIN_APPROX_NONE)
 
-COLOR = (0, 200, 0) # 녹색
+COLOR = (0, 200, 0)   # 녹색
 
 for cnt in contours:
     if cv2.contourArea(cnt) > 25000:
         x, y, width, height = cv2.boundingRect(cnt)
-        cv2.rectangle(target_img, (x, y), (x + width, y + height), COLOR, 2) # 사각형 그림
+        cv2.rectangle(target_img, (x, y), (x + width, y + height), COLOR, 2)   # 사각형 그림
+
+img = cv2.resize(img, (600,375))
+target_img = cv2.resize(target_img, (600,375))
 
 cv2.imshow('img', img)
 cv2.imshow('target_img', target_img)
@@ -246,26 +268,24 @@ cv2.destroyAllWindows()
 import cv2
 
 img = cv2.imread('./card.png')
-target_img = img.copy() # 사본 이미지
+target_img = img.copy()   # 사본 이미지
 
 gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 ret, otsu = cv2.threshold(gray, -1, 255, cv2.THRESH_BINARY | cv2.THRESH_OTSU)
 contours, hierarchy = cv2.findContours(otsu, cv2.RETR_LIST, cv2.CHAIN_APPROX_NONE)
 
-COLOR = (0, 200, 0) # 녹색
+COLOR = (0, 200, 0)   # 녹색
 
 idx = 1
 
 for cnt in contours:   # 윤곽선의 개수를 순서대로 돌려라
     if cv2.contourArea(cnt) > 25000:
         x, y, width, height = cv2.boundingRect(cnt)
-        cv2.rectangle(target_img, (x, y), (x + width, y + height), COLOR, 2) # 사각형 그림
+        cv2.rectangle(target_img, (x, y), (x + width, y + height), COLOR, 2)   # 사각형 그림
 
-        # 직사각형 영역에 해당하는 이미지만 자르기
-        crop = img[y:y+height, x:x+width]
+        crop = img[y:y+height, x:x+width]   # 직사각형 영역에 해당하는 이미지만 자르기
         cv2.imshow('crop', crop)
-        # 자른 이미지 저장하기
-        cv2.imwrite(f'crop_card_{idx}.png', crop)
+        cv2.imwrite(f'crop_card_{idx}.png', crop)   # 자른 이미지 저장하기
         idx += 1
 
 cv2.imshow('img', img)

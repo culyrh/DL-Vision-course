@@ -9,10 +9,6 @@
 import torch
 import numpy as np
 
-
-
-
-
 list_data = [ [10, 20], [30, 40] ]
 
 tensor1 = torch.Tensor(list_data)
